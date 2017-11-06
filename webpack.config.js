@@ -14,7 +14,7 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, './dist'),
-    publicPath: 'http://localhost:8080/dist/',
+    publicPath: 'http://localhost:8080/static/admin',
     filename: 'build.js',
   },
   module: {
@@ -50,6 +50,7 @@ module.exports = {
     },
   },
   plugins: [
+    new webpack.ContextReplacementPlugin(/moment[/\\]locale$/, /ru/),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
       filename: 'vendor.js',
