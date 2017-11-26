@@ -1,5 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 // const LiveReloadPlugin = require('webpack-livereload-plugin');
 
 module.exports = {
@@ -23,6 +24,7 @@ module.exports = {
         test: /\.vue$/,
         loader: 'vue-loader',
         options: {
+          extractCSS: true,
           loaders: {
           },
           // other vue-loader options go here
@@ -37,20 +39,45 @@ module.exports = {
         test: /\.(png|jpg|gif|svg)$/,
         loader: 'file-loader',
         options: {
-          name: '[name].[ext]?[hash]',
+          name: './images/[path][name]-[hash:4].[ext]',
         },
+      },
+      {
+        test: /\.less$/,
+        use: [
+          // { loader: 'style-loader' },
+          { loader: 'css-loader' },
+          { loader: 'less-loader' },
+        ],
+      },
+      {
+        test: /\.css$/,
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: 'css-loader',
+        }),
       },
     ],
   },
   resolve: {
+    // extensions: ['.js', '.json', '.vue', '.ts'],
     alias: {
       vue$: 'vue/dist/vue.esm.js',
-      // legacy: path.resolve(__dirname, './legacy'),
-      Components: path.resolve(__dirname, './src/components'),
+      '~assets': path.resolve(__dirname, './src/assets/'),
+      '~legacy': path.resolve(__dirname, './src/assets/legacy/'),
+      '~components': path.resolve(__dirname, './src/components/'),
+      '~plugins': path.resolve(__dirname, './src/plugins/'),
+      '~mixins': path.resolve(__dirname, './src/mixins/'),
+      styles: path.resolve(__dirname, './src/styles/'),
     },
   },
   plugins: [
+    new ExtractTextPlugin('style.css'),
     new webpack.ContextReplacementPlugin(/moment[/\\]locale$/, /ru/),
+    new webpack.DefinePlugin({
+      NODE_ENV: JSON.stringify(process.env.NODE_ENV),
+      NET_DELAY: 2,
+    }),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
       filename: 'vendor.js',

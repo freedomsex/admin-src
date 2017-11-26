@@ -1,6 +1,5 @@
 <script>
 export default {
-  name: 'app',
   data() {
     return {
       //
@@ -11,3 +10,7 @@ export default {
   },
 };
 </script>
+
+<style lang="less">
+@import '~styles/_main.less';
+</style>
