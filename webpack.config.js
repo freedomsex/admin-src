@@ -1,6 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 // const LiveReloadPlugin = require('webpack-livereload-plugin');
 
 module.exports = {
@@ -39,7 +40,8 @@ module.exports = {
         test: /\.(png|jpg|gif|svg)$/,
         loader: 'file-loader',
         options: {
-          name: './images/[path][name]-[hash:4].[ext]',
+          name: '/images/[path][name]-[hash:4].[ext]',
+          // publicPath: 'images/',
         },
       },
       {
@@ -104,9 +106,10 @@ if (process.env.NODE_ENV === 'production') {
         NODE_ENV: '"production"',
       },
     }),
-    new webpack.optimize.UglifyJsPlugin({
+    new UglifyJSPlugin({
       sourceMap: true,
-      compress: {
+      uglifyOptions: {
+        compress: true,
         warnings: false,
       },
     }),

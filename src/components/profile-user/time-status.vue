@@ -39,7 +39,7 @@ export default {
         История
       </button>
       <span class="profile-info__age"></span>
-      <user-data-history-activity v-if="dialogs.userDataHistory"
+      <user-data-history-activity :userId="user.id" v-if="dialogs.userDataHistory"
        @close="dialogs.userDataHistory = false">
       </user-data-history-activity>
     </div>

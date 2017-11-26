@@ -5,17 +5,19 @@ import 'moment/locale/ru';
 import DefaultActivity from '~components/activities/default-activity.vue';
 
 export default {
+  props: ['userId'],
   data: () => ({
     items: [],
+    loading: true,
   }),
   mounted() {
-    console.log();
     this.load();
   },
   methods: {
     async load() {
-      const { data } = await this.$api('a4sex').load({ id: 24434447 }, 'users/{id}/histories');
+      const { data } = await this.$api('a4sex').load({ id: this.userId }, 'users/{id}/histories');
       this.items = data;
+      this.loading = false;
     },
     analyse(index, key, value) {
       if (index) {
@@ -54,6 +56,14 @@ export default {
       </tr>
 
     </table>
+
+    <div class="" v-if="loading">
+      Загружаю...
+    </div>
+    <div class="" v-else-if="!items.length">
+      Нет данных :(
+    </div>
+
 
   </default-activity>
 </template>

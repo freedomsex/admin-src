@@ -16,7 +16,7 @@ import App from './App.vue'; // For main.less only
 
 Vue.use(ApiPlugin);
 
-const A = new Vue({ // eslint-disable-line no-new
+new Vue({ // eslint-disable-line no-new
   el: '#page_cont',
   // render: h => h(App),
   mounted() {
@@ -28,4 +28,4 @@ const A = new Vue({ // eslint-disable-line no-new
     ProfileStatusWidget,
   },
 });
-console.log(A);
+// console.log(A);
