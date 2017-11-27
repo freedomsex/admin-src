@@ -3,6 +3,7 @@ const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 // const LiveReloadPlugin = require('webpack-livereload-plugin');
+const hosts = require('./hosts');
 
 module.exports = {
   entry: {
@@ -16,7 +17,7 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, './dist'),
-    publicPath: 'http://localhost:8080/static/admin',
+    publicPath: `${hosts.static}/static/admin`,
     filename: 'build.js',
   },
   module: {
@@ -40,8 +41,8 @@ module.exports = {
         test: /\.(png|jpg|gif|svg)$/,
         loader: 'file-loader',
         options: {
-          name: '/images/[path][name]-[hash:4].[ext]',
-          // publicPath: 'images/',
+          name: './images/[path][name]-[hash:4].[ext]',
+          // path: '/',
         },
       },
       {
