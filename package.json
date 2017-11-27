@@ -5,7 +5,7 @@
   "author": "tebaly <support@freedomsex.net>",
   "private": true,
   "scripts": {
-    "dev": "cross-env NODE_ENV=development webpack-dev-server --inline",
+    "dev": "cross-env NODE_ENV=development webpack --watch",
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
     "vuild": "cross-env NODE_ENV=production webpack --progress --verbose --display-modules"
   },

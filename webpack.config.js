@@ -2,8 +2,8 @@ const path = require('path');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
-// const LiveReloadPlugin = require('webpack-livereload-plugin');
-const hosts = require('./hosts');
+const LiveReloadPlugin = require('webpack-livereload-plugin');
+// const hosts = require('./hosts');
 
 module.exports = {
   entry: {
@@ -17,7 +17,7 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, './dist'),
-    publicPath: `${hosts.static}/static/admin`,
+    publicPath: '/static/admin',
     filename: 'build.js',
   },
   module: {
@@ -41,7 +41,7 @@ module.exports = {
         test: /\.(png|jpg|gif|svg)$/,
         loader: 'file-loader',
         options: {
-          name: 'images/[path][name]-[hash:4].[ext]',
+          name: '/images/[path][name]-[hash:4].[ext]',
           // useRelativePath: true,
           // path: '/',
         },
@@ -86,7 +86,7 @@ module.exports = {
       name: 'vendor',
       filename: 'vendor.js',
     }),
-    // new LiveReloadPlugin(),
+    new LiveReloadPlugin(),
   ],
   devServer: {
     historyApiFallback: true,
