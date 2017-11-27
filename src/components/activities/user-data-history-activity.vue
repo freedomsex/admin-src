@@ -20,7 +20,7 @@ export default {
       this.loading = false;
     },
     analyse(index, key, value) {
-      if (index) {
+      if (index && value) {
         return value != this.items[index - 1][key];
       }
       return false;
